@@ -1,0 +1,350 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    /* background: linear-gradient(to bottom, #e6f7ff, #b3e0ff); */
+}
+header{
+    background-color: #003366;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.logo i{
+    font-size: 24px;
+    margin-right: 10px;
+}
+.logo a{
+    color: white;
+    text-decoration: none;
+}
+nav{
+    display: flex;
+    align-items: center;
+}
+nav a{
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+nav a:hover{
+    text-decoration: underline;
+}
+.back{
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.logout{
+    margin-bottom: 0;
+    padding: 8px 15px;
+}
+button{
+    background-color: #0066cc;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover{
+    background-color: #005bb5;
+}
+
+/* Flash messages */
+/* flash messages */
+.flash-messages{
+    margin: 10px 0;
+    text-align: center;
+}
+.alert-success{
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.alert-danger{
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.table-container{
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+.table-container h1{
+    color: #003366;
+    text-align: center;
+}
+.responsive-table{
+    overflow-x: auto;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td{
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th{
+    background-color: #f4f4f4;
+}
+.btn{
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 5px;
+}
+.btn-update, .btn-approve{
+    background-color: #28a745;
+}
+.btn-update:hover, .btn-approve:hover{
+    background-color: #218838;
+}
+.btn-delete, .btn-cancel, .btn-reject{
+    background-color: #dc3545;
+}
+.btn-delete:hover, .btn-cancel:hover, .btn-reject:hover{
+    background-color: #c82333;
+}
+.table-container p{
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-top: 20px;
+}
+
+
+/* View all appointment style for status */
+td[data-label="Status"] {
+    font-weight: bold;
+}
+td[data-label="Status"][data-value="pending"] {
+    color: #ff9900;
+}
+td[data-label="Status"][data-value="confirmed"], td[data-label="Status"][data-value="approved"] {
+    color: #28a745;
+}
+td[data-label="Status"][data-value="cancelled"], td[data-label="Status"][data-value="canceled"] {
+    color: #dc3545;
+}
+
+/* Manage appointment */
+
+
+
+/* Search teacher form with tearch table */
+.teachers-table tbody tr{
+    background-color: #FFFFFF;
+}
+
+
+
+/* Book Appointment */
+.table-container h2{
+    color: #FFFFFF;
+    text-align: center;
+    background-color: #003366;
+    padding: 10px 0;
+}
+.slots-table tbody tr{
+    background-color: #ffffff;
+}
+.radio-button{
+    width: 25%;
+}
+
+
+
+
+/* Table view media query for mobiles screen */
+@media only screen and (min-width: 200px) and (max-width: 600px){
+    header{
+        padding: 10px 12px;
+        flex-direction: column;
+    }
+    .logo{
+        font-size: 20px;
+    }
+    nav{
+        margin-top: 10px;
+    }
+    nav a{
+        margin: 0 5px
+    }
+    .back{
+        font-size: 18px;
+        font-weight: normal;
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    .logout{
+        padding: 8px;
+        font-weight: bold;
+    }
+    .logout i{
+        display: none;
+    }
+    .flash-messages{
+        margin: 10px 10px;
+    }
+
+    .table-container{
+        margin: 15px auto;
+        padding: 5px;
+    }
+    .table-container h1{
+        font-size: 24px;
+    }
+    .responsive-table{
+        overflow-x: hidden;
+    }
+    table{
+        border: 0;
+    }
+    thead{
+        display: none;
+    }
+    tr{
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    td{
+        display: block;
+        text-align: right;
+        padding: 8px;
+        border-bottom: none;
+        position: relative;
+        padding-left: 50%;
+    }
+    td::before{
+        content: attr(data-label);
+        position: absolute;
+        left: 8px;
+        width: 45%;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+        color: #333;
+    }
+    td[data-label="Email"] {
+        word-break: break-all; /* Break email at any character */
+    }
+    td.actions-column{
+        display: block;
+        text-align: center;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+    }
+    td.actions-column::before{
+        content: "";
+    }
+    .btn{
+        display: inline-block;
+        margin: 5px;
+        padding: 6px 8px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .btn-update, .btn-delete, .btn-approve, .btn-cancel, .btn-reject{
+        width: 40%;
+    }
+    .btn i{
+        margin-right: 3px;
+    } 
+}
+
+
+
+
+
+/* TAble view media query for tablets screen */
+@media only screen and (min-width: 601px) and (max-width: 1023px){
+    .table-container{
+        max-width: 100%;
+        margin: 15px auto;
+        padding: 10px;
+    }
+    .table-container h1{
+        font-size: 28px;
+    }
+    .responsive-table {
+        overflow-x: auto;
+    }
+    table{
+        margin-top: 10px;
+    }
+    th, td{
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    th:nth-child(1), td:nth-child(1) { /* Name */
+        width: 20%;
+    }
+    th:nth-child(2), td:nth-child(2) { /* Email */
+        width: 25%;
+    }
+    th:nth-child(3), td:nth-child(3) { /* Department */
+        width: 20%;
+    }
+    th:nth-child(4), td:nth-child(4) { /* Subject */
+        width: 20%;
+    }
+    th:nth-child(5), td:nth-child(5) { /* Actions */
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+    .btn{
+        padding: 5px 8px;
+        margin-right: 0;
+        text-align: center;
+    }
+    .btn-update{
+        margin-bottom: 8px;
+    }
+
+
+    /* manage appointments */
+    .btn-cancel{
+        padding-right: 17.5px;
+    }
+    .approve-form{
+        margin-bottom: 15px;
+    }
+
+
+}

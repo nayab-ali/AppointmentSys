@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact AppointmentSys</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/another_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+            
+        </div>
+        <div class="options">
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="#">Contact</a>
+            </nav>
+            <a href="{{ url_for('login') }}" class="login-btn contact-login">Login/Register</a>
+        </div>
+    </header>
+
+    
+
+    <main class="contact-main">
+        <section class="contact">
+            <div class="contact-form">
+                <h1>Contact Us</h1>
+                <p>Have a question or feedback about AppointmentSys? Feel free to reach out! We'll get back to you as soon as possible.</p>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <p class="alert alert-{{ category }}">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form action="{{ url_for('contact') }}" method="POST">
+                    <label for="name">Name</label>
+                    {% if errors %}
+                        <input type="text" id="name" name="name" placeholder="Your Name" value="{{ request.form.get('name', '') }}" required>
+                    {% else %}
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    {% endif %}
+
+                    <label for="email">Email</label>
+                    {% if errors %}
+                        <input type="email" id="email" name="email" placeholder="Your Email" value="{{ request.form.get('email', '') }}" required>
+                    {% else %}
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    {% endif %}
+
+                    <label for="message">Message</label>
+                    {% if errors %}
+                        <textarea type="text" name="message" id="message" placeholder="Your Message" required>{{ request.form.get('message', '') }}</textarea>
+                    {% else %}
+                        <textarea type="text" name="message" id="message" placeholder="Your Message" required></textarea>
+                    {% endif %}
+
+                    <button type="submit">Send Message</button>
+                </form>
+                {% if success %}
+                    <div class="success-message">
+                        Thank you for your message! We'll get back to you soon.
+                    </div>
+                {% endif %}
+                {% if error %}
+                    <div class="error-message">
+                        There was an error sending your message. Please try again later.
+                    </div>
+                {% endif %}
+            </div>
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <p data-label="Email"><i class="fas fa-envelope"></i> nayab.example@appointmentsys.com</p>
+                <p><i class="fas fa-phone"></i> +91 (000) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Education Lane, Delhi, India</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="{{ url_for('about') }}" class="left">About</a>
+                <a href="{{ url_for('contact') }}">Contact Us</a>
+                <a href="#" class="right">Privacy Policy</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 AppointmentSys. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

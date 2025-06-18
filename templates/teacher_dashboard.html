@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+        </div>
+        <div class="header-right">
+            <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+                <button type="submit" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </form>
+            
+            <div class="dropdown">
+                <button class="dropdown-toggle">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="{{ url_for('change_password') }}" class="dropdown-item">
+                        <i class="fas fa-lock"></i> Change Password
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <p class="alert-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="main-section">
+        <h1 class="title">Teacher <br> Dashboard</h1>
+        <img src="{{ url_for('static', filename='images/teacher.png' ) }}" alt="Teacher">
+    </div>
+    <div class="dashboard">
+        <div class="tile">
+            <i class="fa-solid fa-calendar-plus"></i>
+            <h3>Schedule Appointment</h3>
+            <a href="{{ url_for('schedule_slot') }}" class="tile-link">Schedule Slot</a>
+        </div>
+        <div class="tile">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>Manage Appointments</h3>
+            <a href="{{ url_for('manage_appointments') }}" class="tile-link">Manage Appointments</a>
+        </div>
+        <div class="tile">
+            <i class="fa-solid fa-envelope"></i>
+            <h3>View Messages</h3>
+            <a href="{{ url_for('view_messages') }}" class="tile-link">View Messages</a>
+        </div>
+        <div class="tile">
+            <i class="fa-solid fa-calendar-alt"></i>
+            <h3>View All Appointments</h3>
+            <a href="{{ url_for('view_all_appointments_teacher') }}" class="tile-link">View Appointments</a>
+        </div>
+    </div>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="{{ url_for('about') }}" class="left">About</a>
+                <a href="{{ url_for('contact') }}">Contact Us</a>
+                <a href="#" class="right">Privacy Policy</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 AppointmentSys. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+        </div>
+        <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+            <button type="submit" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </form>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <p class="alert-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="main-section">
+        <h1 class="title">Student <br> Dashboard</h1>
+        <img src="{{ url_for('static', filename='images/student.png' ) }}" alt="Student">
+    </div>
+    <div class="dashboard student_dashboard">
+        <div class="tile">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <h3>Search</h3>
+            <a href="{{ url_for('search_teacher') }}" class="tile-link">Search Teacher</a>
+        </div>
+        <div class="tile">
+            <i class="fas fa-calendar-check" aria-hidden="true"></i>
+            <h3>Book Appointment</h3>
+            <a href="{{ url_for('book_appointment') }}" class="tile-link">Book Appointment</a>
+        </div>
+        <div class="tile">
+            <i class="fas fa-list-alt"></i>
+            <h3>My Appointments</h3>
+            <a href="{{ url_for('view_my_appointments') }}" class="tile-link">View Status</a>
+        </div>
+    </div>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="{{ url_for('about') }}" class="left">About</a>
+                <a href="{{ url_for('contact') }}">Contact Us</a>
+                <a href="#" class="right">Privacy Policy</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 AppointmentSys. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

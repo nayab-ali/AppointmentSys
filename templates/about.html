@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/another_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+            
+        </div>
+        <div class="options">
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </nav>
+            <a href="{{ url_for('login') }}" class="login-btn about-login">Login/Register</a>
+        </div>
+    </header>
+
+    <main class="about-main">
+        <section class="about">
+            <div class="about-content">
+                <h1>About AppointmentSys</h1>
+                <p>AppointmentSys is web-based system designed to streamline the process of scheduling appointments between students and lecturers. Our platform allows students to easily book consultation slots with their teachers, while providing teachers with tools to manage their availability and appointments efficiently.</p>
+                <p>Admin users overse the platform, ensuring smooth operations by managing teacher accounts and approving student registerations. Built with simplicity and efficiency in mind, AppointmentSys aims to enhance communication and organization within educational institutions.</p>
+            </div>
+            <div class="about-image">
+                <div class="about-image-placeholder">
+                    <img src="{{ url_for('static', filename='images/about.png') }}" alt="Female About">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="{{ url_for('about') }}" class="left">About</a>
+                <a href="{{ url_for('contact') }}">Contact Us</a>
+                <a href="#" class="right">Privacy Policy</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 AppointmentSys. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

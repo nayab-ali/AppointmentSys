@@ -1,0 +1,7 @@
+.venv/
+*.py[cod]
+.__app.lock
+__pycache__/
+*.py[cod]
+app.log
+messages.txt

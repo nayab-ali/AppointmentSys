@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Teacher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+        </div>
+        <nav>
+            <a href="{{ url_for('admin_dashboard') }}" class="back ">Back to Dashboard</a> 
+            <!-- there was a logo class in anchor tag -->
+            <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+                <button type="submit" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <div class="main-section add-teacher">
+            <h1>Add Teacher</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('add_teacher') }}" method="POST" class="form-container">
+                <label for="name">Name</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-user icon"></i>
+                    <input type="text" id="name" name="name" placeholder="Enter teacher's name" required>
+                </div>
+                
+                <label for="email">Email</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-envelope icon"></i>
+                    <input type="email" id="email" name="email" placeholder="Enter teacher's email" required>
+                </div>
+                
+                <label for="department">Department</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-chalkboard-teacher icon"></i>
+                    <input type="text" id="department" name="department" placeholder="Enter Department" required>
+                </div>
+                
+                <label for="subject">Subject</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-book icon"></i>
+                    <input type="text" name="subject" id="subject" placeholder="Enter Subject" required>
+                </div>
+                
+                <button type="submit">Add Teacher</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

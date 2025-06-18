@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Teacher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+        </div>
+        <nav>
+            <a href="{{ url_for('student_dashboard') }}" class="back ">Back to Dashboard</a> 
+            <!-- there was a logo class in anchor tag -->
+            <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+                <button type="submit" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </form>
+        </nav>
+    </header>
+
+    <main class="main-search-teacher">
+        <div class="main-section search-teacher">
+            <h1>Search Teacher</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <p class="alert-{{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('search_teacher') }}" method="POST" class="form-container">
+                <label for="name">Teacher Name:</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-user icon"></i>
+                    <input type="text" id="name" name="name" value="{{ search_name }}" placeholder="Enter teacher name">
+                </div>
+
+                <label for="department">Department:</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-chalkboard-teacher icon"></i>
+                    <input type="text" name="department" id="department" value="{{ search_department }}" placeholder="Enter department">
+                </div>
+
+                <label for="subject">Subject:</label>
+                <div class="input-icon">
+                    <i class="fa-solid fa-book icon"></i>
+                    <input type="text" name="subject" id="subject" value="{{ search_subject }}" placeholder="Enter subject">
+                </div>
+                <button type="submit">Search Teacher</button>
+            </form>
+        </div>
+    </main>
+
+            <div class="table-container">
+                {% if teachers %}
+                    <div class="responsive-table">
+                        <table class="teachers-table">
+                            <thead>
+                                <tr>
+                                    <th>Teacher Name</th>
+                                    <th>Department</th>
+                                    <th>Subject</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for teacher, user in teachers %}
+                                    <tr>
+                                        <td data-label="Teacher Name">{{ user.name }}</td>
+                                        <td data-label="Department">{{ teacher.department }}</td>
+                                        <td data-label="Subject">{{ teacher.subject }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p>No teachers found.</p>
+                {% endif %}
+            </div>
+        
+    
+</body>
+</html>

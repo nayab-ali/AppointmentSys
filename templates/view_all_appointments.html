@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Appointments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+        </div>
+        <nav>
+            <a href="{{ url_for('admin_dashboard') }}" class="back ">Back to Dashboard</a>
+            <!-- there was a logo class in anchor tag -->
+            <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+                <button type="submit" class="logout"><i class="fas fa-sign-out-alt"></i>   Logout</button>
+            </form>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <p class="alert alert-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="table-container">
+        <h1>View All Appointments</h1>
+        {% if appointments %}
+            <div class="responsive-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Teacher Name</th>
+                            <th>Date</th>
+                            <th>Time Slot</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appt in appointments %}
+                            <tr>
+                                <td data-label="Student Name">{{ appt.student_name }}</td>
+                                <td data-label="Teacher Name">{{ appt.teacher_name }}</td>
+                                <td data-label="Date">{{ appt.date }}</td>
+                                <td data-label="Time Slot">{{ appt.time_slot }}</td>
+                                <td data-label="Status" data-value="{{ appt.status }}">{{ appt.status.capitalize() }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>No appointments found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

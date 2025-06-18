@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+        </div>
+        <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+            <button type="submit" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </form>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <p class="alert-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="main-section">
+        <h1 class="title">Admin <br> Dashboard</h1>
+        <img src="{{ url_for('static', filename='images/admin.png' ) }}" alt="Admin">
+    </div>
+    <div class="dashboard">
+        <div class="tile">
+            <i class="fa-solid fa-square-plus"></i>
+            <h3>Add Teacher</h3>
+            
+            <a href="{{ url_for('add_teacher') }}" class="tile-link">Add teacher</a>
+        </div>
+        <div class="tile">
+            <!-- <i class="fas fa-user-edit"></i> -->
+             <i class="fa-solid fa-file-pen"></i>
+            <h3>Update/Delete Teacher</h3>
+            <a href="{{ url_for('update_delete_teacher') }}" class="tile-link">Manage Teachers</a>
+        </div>
+        <div class="tile">
+            <!-- <i class="fas fa-user-check"></i> -->
+             <i class="fa-solid fa-check-to-slot"></i>
+            <h3>Approve Students</h3>
+            <a href="{{ url_for('approve_students') }}" class="tile-link">Approve Students</a>
+        </div>
+        <div class="tile">
+            <!-- <i class="fas fa-calendar-alt"></i> -->
+             <i class="fa-solid fa-rectangle-list"></i>
+            <h3>View All Appointments</h3>
+            <a href="{{ url_for('view_all_appointments') }}" class="tile-link">View appointments</a>
+        </div>
+    </div>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="{{ url_for('about') }}" class="left">About</a>
+                <a href="{{ url_for('contact') }}">Contact Us</a>
+                <a href="#" class="right">Privacy Policy</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 AppointmentSys. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Appointments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-calendar"></i>
+            <a href="{{ url_for('home') }}">AppointmentSys</a>
+        </div>
+        <nav>
+            <a href="{{ url_for('teacher_dashboard') }}" class="back ">Back to Dashboard</a> 
+            <!-- there was a logo class in anchor tag -->
+            <form action="{{ url_for('logout') }}" method="POST" style="display: inline;">
+                <button type="submit" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </form>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <p class="alert alert-{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="table-container">
+        <h1>Manage Appointments</h1>
+        {% if appointments %}
+            <div class="responsive-table appointment-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Date</th>
+                            <th>Time slot</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment, teacher_slot, student in appointments %}
+                            <tr>
+                                <td data-label="Student Name">{{ student.name }}</td>
+                                <td data-label="Date">{{ teacher_slot.date.strftime('%d-%m-%Y') }}</td>
+                                <td data-label="Time">{{ teacher_slot.time }}</td>
+                                <td data-label="Status" data-value="{{ appointment.status }}">{{ appointment.status.capitalize() }}</td>
+                                
+                                <td data-label="Actions" class="actions-column appointment-actions">
+                                    {% if appointment.status == 'pending' %}
+                                        <form action="{{ url_for('approve_appointment', appointment_id=appointment.id) }}" method="POST" style="display:inline;" class="approve-form">
+                                            <a href="#" onclick="this.parentNode.submit();" class="btn btn-approve"><i class="fas fa-check"></i> Approve</a>
+                                        </form>
+                                        <form action="{{ url_for('cancel_appointment', appointment_id=appointment.id) }}" method="POST" style="display:inline;">
+                                            <a href="#" onclick="return confirmCancel(this.parentNode);" class="btn btn-cancel"><i class="fas fa-times"></i> Cancel</a>
+                                        </form>
+                                    {% else %}
+                                        <span class="action-done">{{ appointment.status.capitalize() }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>No appointments found.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        function confirmCancel(form) {
+            if (confirm('Are you sure you want to cancel this appointment?')) {
+                form.submit();  // Submit the form if user clicks "OK"
+                return true;
+            } else {
+                return false;  // Prevent form submission if user clicks "Cancel"
+            }
+        }
+    </script>
+</body>
+</html>
