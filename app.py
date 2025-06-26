@@ -14,7 +14,7 @@ import re
 # Initialize Flask App
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'the-gift'
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+mysqlconnector://{os.environ.get('MYSQL_USER')}:{os.environ.get('MYSQL_PASSWORD')}@{os.environ.get('MYSQL_HOST')}/{os.environ.get('MYSQL_DB')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MYSQL_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize extension
