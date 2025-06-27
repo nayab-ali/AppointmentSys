@@ -1,4 +1,4 @@
-.venv/
+
 *.py[cod]
 .__app.lock
 __pycache__/
