@@ -11,6 +11,7 @@ from datetime import datetime, date, time
 import os
 import re
 import pymysql
+pymysql.install_as_MySQLdb()
 
 # Initialize Flask App
 app = Flask(__name__)
