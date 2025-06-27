@@ -10,7 +10,7 @@ from sqlalchemy.orm import aliased
 from datetime import datetime, date, time
 import os
 import re
-import pymysql
+
 
 # Initialize Flask App
 app = Flask(__name__)
